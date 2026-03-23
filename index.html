@@ -3,6 +3,531 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESSEC Spark APAC â From Idea to Traction</title>
+<style>
+  :root {
+    --navy: #3b57a1;
+    --blue: #1da1e0;
+    --purple: #3b57a1;
+    --purple-light: #e8eef7;
+    --gold: #d67e4a;
+    --dark: #2a3f7a;
+    --teal: #44a4a4;
+    --pink: #cc5185;
+    --red: #c73432;
+    --text: #333;
+    --text-light: #666;
+    --white: #fff;
+    --bg: #FAFBFD;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--bg); line-height: 1.65; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #2a3f7a 0%, var(--navy) 40%, var(--blue) 100%);
+    color: var(--white);
+    padding: 80px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 25% 75%, rgba(29,161,224,0.2) 0%, transparent 50%),
+                radial-gradient(circle at 75% 25%, rgba(214,126,74,0.15) 0%, transparent 50%);
+    animation: drift 25s ease-in-out infinite;
+  }
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    50% { transform: translate(-15px, 10px) rotate(1deg); }
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 820px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(29,161,224,0.25);
+    border: 1px solid rgba(29,161,224,0.4);
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 0.82rem;
+    letter-spacing: 0.5px;
+    margin-bottom: 24px;
+    backdrop-filter: blur(10px);
+  }
+  .hero h1 { font-size: 2.9rem; font-weight: 700; margin-bottom: 8px; line-height: 1.15; }
+  .hero h1 .ai { color: var(--gold); }
+  .hero .tagline { font-size: 1.3rem; opacity: 0.92; margin-bottom: 28px; font-weight: 300; }
+  .hero p.subtitle { font-size: 1.05rem; opacity: 0.8; margin-bottom: 36px; max-width: 620px; margin-left: auto; margin-right: auto; }
+  .hero-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 36px; flex-wrap: wrap; }
+  .hero-stat { text-align: center; }
+  .hero-stat .number { font-size: 2rem; font-weight: 700; color: var(--gold); }
+  .hero-stat .label { font-size: 0.85rem; opacity: 0.8; }
+  .cta-btn {
+    display: inline-block; background: var(--gold); color: var(--navy);
+    padding: 16px 40px; border-radius: 8px; text-decoration: none;
+    font-weight: 700; font-size: 1.1rem;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 15px rgba(214,126,74,0.3);
+  }
+  .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(214,126,74,0.4); }
+  .cta-secondary {
+    display: inline-block; color: var(--white); padding: 12px 28px; margin-left: 16px;
+    border: 1px solid rgba(255,255,255,0.4); border-radius: 8px;
+    text-decoration: none; font-weight: 500; font-size: 1rem; transition: background 0.2s;
+  }
+  .cta-secondary:hover { background: rgba(255,255,255,0.1); }
+  .deadline { margin-top: 16px; font-size: 0.9rem; opacity: 0.6; }
+
+  /* Sections */
+  .container { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  section { padding: 64px 0; }
+  section h2 { font-size: 2rem; color: var(--navy); text-align: center; margin-bottom: 12px; }
+  section .section-sub { text-align: center; color: var(--text-light); font-size: 1.05rem; max-width: 640px; margin: 0 auto 40px; }
+
+  /* AI Difference Banner */
+  .ai-banner {
+    background: linear-gradient(135deg, var(--purple-light), #dce8f5);
+    border: 1px solid rgba(59,87,161,0.15);
+    border-radius: 16px;
+    padding: 40px 32px;
+    margin: -32px auto 0;
+    max-width: 880px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+  .ai-banner h3 { color: var(--purple); font-size: 1.3rem; margin-bottom: 12px; }
+  .ai-banner p { color: var(--text); font-size: 1rem; max-width: 640px; margin: 0 auto; }
+  .ai-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+    text-align: left;
+  }
+  .ai-example {
+    background: var(--white);
+    border-radius: 10px;
+    padding: 16px;
+    border: 1px solid rgba(59,87,161,0.1);
+  }
+  .ai-example .before { color: #999; font-size: 0.82rem; text-decoration: line-through; }
+  .ai-example .after { color: var(--blue); font-weight: 600; font-size: 0.95rem; margin-top: 4px; }
+  .ai-example .task { color: var(--text-light); font-size: 0.82rem; margin-top: 4px; }
+
+  /* Value Props */
+  .value-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+  .value-card {
+    background: var(--white); border-radius: 12px; padding: 32px 24px;
+    border: 1px solid #e8ecf1; transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .value-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.06); transform: translateY(-2px); }
+  .value-card.ai-accent { border-left: 3px solid var(--blue); }
+  .value-icon { font-size: 2rem; margin-bottom: 16px; }
+  .value-card h3 { font-size: 1.15rem; color: var(--navy); margin-bottom: 8px; }
+  .value-card p { color: var(--text-light); font-size: 0.95rem; }
+  .hero-stat { text-align: center; max-width: 220px; }  .hero-stat .label { font-size: 0.85rem; opacity: 0.8; line-height: 1.4; }
+  /* Timeline */
+  .timeline-section { background: linear-gradient(180deg, #edf2f9, var(--bg)); }
+  .timeline { position: relative; max-width: 720px; margin: 0 auto; }
+  .timeline::before {
+    content: ''; position: absolute; left: 24px; top: 0; bottom: 0;
+    width: 2px; background: linear-gradient(180deg, var(--navy), var(--blue)); opacity: 0.3;
+  }
+  .timeline-item { position: relative; padding-left: 64px; margin-bottom: 32px; }
+  .timeline-dot {
+    position: absolute; left: 16px; top: 4px; width: 18px; height: 18px;
+    border-radius: 50%; background: var(--blue); border: 3px solid #edf2f9;
+  }
+  .timeline-week { font-weight: 700; color: var(--purple); font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.5px; }
+  .timeline-title { font-size: 1.1rem; font-weight: 600; color: var(--navy); margin: 4px 0; }
+  .timeline-desc { color: var(--text-light); font-size: 0.93rem; }
+  .timeline-ai {
+    display: inline-block; background: var(--purple-light); color: var(--purple);
+    font-size: 0.8rem; font-weight: 600; padding: 3px 10px; border-radius: 12px; margin-top: 6px;
+  }
+
+  /* Who */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .who-card {
+    background: var(--white); border-radius: 12px; padding: 28px; border-left: 4px solid var(--blue);
+  }
+  .who-card h3 { color: var(--navy); margin-bottom: 8px; font-size: 1.05rem; }
+  .who-card p { color: var(--text-light); font-size: 0.93rem; }
+  .who-card .note { font-size: 0.82rem; color: var(--teal); margin-top: 8px; font-style: italic; }
+
+  /* Prizes */
+  .prizes-section { background: var(--navy); color: var(--white); }
+  .prizes-section h2 { color: var(--white); }
+  .prizes-section .section-sub { color: rgba(255,255,255,0.7); }
+  .prize-cards { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+  .prize-card {
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px; padding: 32px 28px; text-align: center; width: 220px;
+    backdrop-filter: blur(10px);
+  }
+  .prize-card.featured { border-color: var(--gold); background: rgba(212,168,67,0.1); }
+  .prize-rank { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; margin-bottom: 8px; }
+  .prize-amount { font-size: 2rem; font-weight: 700; color: var(--gold); }
+  .prize-note { font-size: 0.8rem; opacity: 0.6; margin-top: 8px; }
+
+  /* Supported By */
+  .supported { text-align: center; padding: 40px 24px; background: var(--white); border-top: 1px solid #e8ecf1; }
+  .supported p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 12px; }
+  .supported .orgs { font-weight: 600; color: var(--navy); font-size: 1rem; }
+
+  /* FAQ */
+  .faq-list { max-width: 700px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid #e8ecf1; padding: 20px 0; }
+  .faq-q { font-weight: 600; color: var(--navy); font-size: 1.05rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+  .faq-q::after { content: '+'; font-size: 1.3rem; color: var(--purple); transition: transform 0.2s; }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); }
+  .faq-a { color: var(--text-light); font-size: 0.95rem; margin-top: 12px; display: none; }
+  .faq-item.open .faq-a { display: block; }
+
+  /* CTA */
+  .cta-section {
+    background: linear-gradient(135deg, var(--navy), var(--blue));
+    color: var(--white); text-align: center; padding: 64px 24px;
+  }
+  .cta-section h2 { color: var(--white); margin-bottom: 16px; }
+  .cta-section p { color: rgba(255,255,255,0.8); margin-bottom: 32px; max-width: 520px; margin-left: auto; margin-right: auto; }
+
+  /* Footer */
+  footer {
+    background: var(--dark); color: rgba(255,255,255,0.5); text-align: center;
+    padding: 32px 24px; font-size: 0.85rem;
+  }
+  footer a { color: rgba(255,255,255,0.7); text-decoration: none; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 2rem; }
+    .hero-stats { gap: 20px; }
+    .who-grid { grid-template-columns: 1fr; }
+    .ai-examples { grid-template-columns: 1fr; }
+    .cta-secondary { display: block; margin: 12px auto 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">ESSEC ALUMNI &middot; APAC &middot; AI-POWERED &middot; PILOT COHORT 1</div>
+    <h1>ESSEC <span class="ai">Spark</span> APAC</h1>
+    <p class="tagline">From idea to traction &mdash; powered by AI</p>
+    <p class="subtitle">For ESSEC alumni in APAC who are working but ready to test their startup idea.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="number">6+12</div><div class="label">6 weeks to validate.<br>12 weeks to build &amp; launch.</div></div>
+      <div class="hero-stat"><div class="number">15&rarr;3</div><div class="label">15 teams in validation.<br>Top 3 advance to build &amp; launch.</div></div>
+      <div class="hero-stat"><div class="number">&euro;500</div><div class="label">Grant per team*</div></div>
+    </div>
+    <p style="font-size:0.82rem; opacity:0.6; margin-top:-20px; margin-bottom:20px;">*For top 3 teams advancing to build &amp; launch. Matched 1-for-1 by the founding team (&euro;1,000 total)</p>
+    <a href="#apply" class="cta-btn">Apply Now</a>
+    <a href="#programme" class="cta-secondary">See the Programme</a>
+    <p class="deadline">Applications close on June 15 &middot; Phase 1 starts August 3 &middot; Demo Day December 11</p>
+  </div>
+</section>
+
+<!-- AI DIFFERENCE BANNER -->
+<div class="container">
+  <div class="ai-banner">
+    <h3>Why AI Changes Everything for Side-Project Founders</h3>
+    <p>The #1 barrier for working professionals is time. AI collapses weeks of manual work into hours.</p>
+    <div class="ai-examples">
+      <div class="ai-example">
+        <div class="before">2 weeks of manual research</div>
+        <div class="after">1 evening with AI</div>
+        <div class="task">Customer discovery &amp; problem mapping</div>
+      </div>
+      <div class="ai-example">
+        <div class="before">1 week + a developer</div>
+        <div class="after">2 hours with AI builders</div>
+        <div class="task">Landing page with copy &amp; design</div>
+      </div>
+      <div class="ai-example">
+        <div class="before">Days of manual outreach</div>
+        <div class="after">30 minutes with AI</div>
+        <div class="task">Cold emails, community posts &amp; LinkedIn content across channels</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE PROPS -->
+<section>
+  <div class="container">
+    <h2>What You Get</h2>
+    <p class="section-sub">Not an educational programme. A structured path from side idea to real startup.</p>
+    <div class="value-grid">
+      <div class="value-card ai-accent">
+        <div class="value-icon">&#x1F916;</div>
+        <h3>AI Workflows Every Week</h3>
+        <p>Research, landing pages, traffic generation, interview synthesis, MVP building, acquisition &mdash; all AI-powered. Leave with a toolkit you&rsquo;ll reuse forever.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#x1f9ea;</div>
+        <h3>Proven Validation Method</h3>
+        <p>6 weeks, 2 experiments, real traffic (online + offline), real data. A proven validation method used by top accelerators.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#x1f680;</div>
+        <h3>Build &amp; Launch (Phase 2)</h3>
+        <p>Top 3 projects advance to 12 weeks of intensive execution: ship an MVP, acquire users, generate first revenue.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#x1f465;</div>
+        <h3>Interfounder Office Hours</h3>
+        <p>The most valuable format in top accelerators: founders challenging and supporting each other weekly. No generic mentors &mdash; only operators and builders.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#x1f4bc;</div>
+        <h3>Keep Your Day Job</h3>
+        <p>Phase 1: 5&ndash;7 hrs/week. Phase 2: ~10&ndash;15 hrs/week. AI handles the heavy lifting so you don&rsquo;t have to.</p>
+      </div>
+      <div class="value-card">
+        <div class="value-icon">&#x1f3af;</div>
+        <h3>Exposure to investors</h3>
+        <p>Demo Day in December with ESSEC alumni investors and ecosystem partners. Strong projects get warm intros to accelerators and angels.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 1 TIMELINE -->
+<section class="timeline-section" id="programme">
+  <div class="container">
+    <h2>Phase 1 &mdash; Validate (6 Weeks)</h2>
+    <p class="section-sub">10&ndash;20 participants. Weekly 90-min live sessions with AI demos and peer hot seats, plus AI-assisted fieldwork. Fast, structured, experiment-driven.</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 1</div>
+        <div class="timeline-title">Idea to Hypothesis</div>
+        <div class="timeline-desc">Frame your startup idea as a testable hypothesis. Identify your riskiest assumption.</div>
+        <span class="timeline-ai">AI: Problem research &amp; market synthesis</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 2</div>
+        <div class="timeline-title">Design Experiment #1 + Traffic Strategy</div>
+        <div class="timeline-desc">Design your first validation test. Build your traffic plan: online (communities, LinkedIn, cold outreach, content) and offline (meetups, events, conversations). Identify 3+ channels.</div>
+        <span class="timeline-ai">AI: Landing page builder + outreach drafter</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 3</div>
+        <div class="timeline-title">Run Experiment #1 + Execute Traffic</div>
+        <div class="timeline-desc">Activate your channels &mdash; online and offline. Drive real people to your experiment. Track what works.</div>
+        <span class="timeline-ai">AI: Content engine for outreach &amp; social listening</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 4</div>
+        <div class="timeline-title">Analyse &amp; Iterate</div>
+        <div class="timeline-desc">Interpret results, separate signal from noise, design Experiment #2.</div>
+        <span class="timeline-ai">AI: Data analysis &amp; insight extraction</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 5</div>
+        <div class="timeline-title">Run Experiment #2</div>
+        <div class="timeline-desc">Execute your refined experiment. Deepen customer conversations. Test willingness to pay.</div>
+        <span class="timeline-ai">AI: Interview transcription &amp; competitive intel</span>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-week">Week 6</div>
+        <div class="timeline-title">Phase 1 Demo Day &mdash; Selection</div>
+        <div class="timeline-desc">Present your findings. Top 3 projects are selected for Phase 2. Everyone walks away with a go/no-go decision and a reusable AI toolkit.</div>
+        <span class="timeline-ai">AI: Pitch structure &amp; presentation design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHASE 2 TIMELINE -->
+<section style="padding-top:32px;">
+  <div class="container">
+    <h2>Phase 2 &mdash; Build &amp; Launch (12 Weeks)</h2>
+    <p class="section-sub">Highly selective: only the top 3 projects advance. Starts immediately after Phase 1 selection. Ship a live MVP, acquire real users, generate first revenue.</p>
+    <div class="timeline" style="max-width:720px; margin:0 auto;">
+      <div class="timeline-item" style="position:relative; padding-left:64px; margin-bottom:32px;">
+        <div class="timeline-dot" style="position:absolute; left:16px; top:4px; width:18px; height:18px; border-radius:50%; background:var(--blue); border:3px solid var(--bg);"></div>
+        <div class="timeline-week" style="color:var(--blue);">Weeks 1&ndash;4 (Sep 22 &ndash; Oct 17)</div>
+        <div class="timeline-title">MVP Build</div>
+        <div class="timeline-desc">Define ruthlessly minimal scope. Build with AI as your coding partner. Ship to first 10 users.</div>
+        <span class="timeline-ai" style="background:#dbeafe; color:var(--blue);">AI: Rapid prototyping &amp; no-code builds</span>
+      </div>
+      <div class="timeline-item" style="position:relative; padding-left:64px; margin-bottom:32px;">
+        <div class="timeline-dot" style="position:absolute; left:16px; top:4px; width:18px; height:18px; border-radius:50%; background:var(--blue); border:3px solid var(--bg);"></div>
+        <div class="timeline-week" style="color:var(--blue);">Weeks 5&ndash;8 (Oct 20 &ndash; Nov 14)</div>
+        <div class="timeline-title">Acquisition &amp; First Revenue</div>
+        <div class="timeline-desc">Activate growth channels. Optimise onboarding. Run pricing experiments. Pursue first paying customers.</div>
+        <span class="timeline-ai" style="background:#dbeafe; color:var(--blue);">AI: Growth automation &amp; content at scale</span>
+      </div>
+      <div class="timeline-item" style="position:relative; padding-left:64px; margin-bottom:32px;">
+        <div class="timeline-dot" style="position:absolute; left:16px; top:4px; width:18px; height:18px; border-radius:50%; background:var(--blue); border:3px solid var(--bg);"></div>
+        <div class="timeline-week" style="color:var(--blue);">Weeks 9&ndash;12 (Nov 17 &ndash; Dec 11)</div>
+        <div class="timeline-title">Scale &amp; Prepare</div>
+        <div class="timeline-desc">Double down on what works. Automate with AI. Prepare Demo Day materials. Refine investor narrative.</div>
+        <span class="timeline-ai" style="background:#dbeafe; color:var(--blue);">AI: Ops automation &amp; pitch prep</span>
+      </div>
+      <div class="timeline-item" style="position:relative; padding-left:64px; margin-bottom:32px;">
+        <div class="timeline-dot" style="position:absolute; left:16px; top:4px; width:18px; height:18px; border-radius:50%; background:var(--gold); border:3px solid var(--bg);"></div>
+        <div class="timeline-week" style="color:var(--gold);">December 11</div>
+        <div class="timeline-title">Demo Day &mdash; Live Product + Traction</div>
+        <div class="timeline-desc">Present to a jury of ESSEC alumni investors and ecosystem partners. Live product demo, real metrics, real users.</div>
+        <span class="timeline-ai" style="background:#fef3c7; color:#92400e;">Path to Tier 1 programmes &amp; angel investors</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IS THIS FOR -->
+<section>
+  <div class="container">
+    <h2>Who Is This For?</h2>
+    <p class="section-sub">This programme is built for a specific kind of person. Does this sound like you?</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <h3>ESSEC Alumnus/Alumna</h3>
+        <p>Any programme &mdash; BBA, MIM, Specialized Masters, GMBA, EMBA.</p>
+      </div>
+      <div class="who-card">
+        <h3>Based in APAC</h3>
+        <p>Singapore, Hong Kong, Tokyo, Sydney, Mumbai, Jakarta, Seoul, Taipei, Bangkok, or elsewhere in the region.</p>
+      </div>
+      <div class="who-card">
+        <h3>Currently Working</h3>
+        <p>You have a stable job but a startup idea you keep thinking about. You haven&rsquo;t taken the leap yet.</p>
+      </div>
+      <div class="who-card">
+        <h3>Ready to Test with AI</h3>
+        <p>5&ndash;7 hours/week for 6 weeks. No AI expertise needed &mdash; we teach the workflows.</p>
+        <p class="note">Your idea does NOT need to be an AI startup. We use AI as the tool, not the topic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INCENTIVES -->
+<section class="prizes-section">
+  <div class="container">
+    <h2>What&rsquo;s at Stake</h2>
+    <p class="section-sub">The real incentive is advancement. Phase 2 selection, build grants, and a December Demo Day with Tier 1 programme access.</p>
+    <div class="prize-cards">
+      <div class="prize-card">
+        <div class="prize-rank">Phase 1</div>
+        <div class="prize-amount">10&ndash;20</div>
+        <div class="prize-note">Participants validate ideas in 6 weeks with AI</div>
+      </div>
+      <div class="prize-card featured">
+        <div class="prize-rank">Phase 2</div>
+        <div class="prize-amount">3</div>
+        <div class="prize-note">Selected projects get &euro;500 build grant (matched 1:1 by founder) + 12 weeks intensive support</div>
+      </div>
+      <div class="prize-card">
+        <div class="prize-rank">Demo Day</div>
+        <div class="prize-amount">Dec</div>
+        <div class="prize-note">Live product + traction &rarr; path to accelerators &amp; angel investors</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORTED BY -->
+<div class="supported">
+  <p>An initiative of</p>
+  <div style="display:flex; justify-content:center; align-items:center; gap:48px; flex-wrap:wrap; margin:20px 0;">
+    <a href="https://www.essec.edu" target="_blank" style="display:inline-block;">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Logo_essec2.svg/330px-Logo_essec2.svg.png" alt="ESSEC Business School" style="height:60px; object-fit:contain;">
+    </a>
+    <a href="https://www.essecalumni.com" target="_blank" style="display:inline-block;">
+      <img src="https://www.essecalumni.com/medias/image/102430485764bfd42854717.png" alt="ESSEC Alumni" style="height:60px; object-fit:contain;">
+    </a>
+  </div>
+  <p class="orgs">ESSEC Institute for Entrepreneurship &amp; Innovation APAC &middot; Supported by ESSEC Alumni</p>
+</div>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">Does my startup idea need to be AI-related?</div>
+        <div class="faq-a">No. Your idea can be in any industry. We use AI as the <em>tool</em> to accelerate your validation, not as the topic. Whether you&rsquo;re exploring fintech, food delivery, or fashion &mdash; AI helps you test faster.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need AI experience?</div>
+        <div class="faq-a">Not at all. We teach every AI workflow from scratch. If you can use a search engine, you can learn this. Curiosity is the only prerequisite.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Does it cost anything?</div>
+        <div class="faq-a">The programme itself is free. You&rsquo;ll use free-tier AI tools (we&rsquo;ll share a recommended list at kickoff). The only real &ldquo;cost&rdquo; is your time (~5&ndash;7 hours per week).</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">I don&rsquo;t have a fully formed idea yet. Can I still apply?</div>
+        <div class="faq-a">Yes. You need a problem space and a rough direction, but it doesn&rsquo;t need to be polished. The programme &mdash; and AI &mdash; helps you sharpen it.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can I apply with a co-founder?</div>
+        <div class="faq-a">Yes! Teams of up to 2 are welcome. At least one member must be an ESSEC alumnus/alumna.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What time are the live sessions?</div>
+        <div class="faq-a">APAC-friendly evenings (e.g. 8pm SGT / 9pm HKT). All sessions are recorded for those who can&rsquo;t join live.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What happens if I&rsquo;m not selected for Phase 2?</div>
+        <div class="faq-a">You still walk away with a clear go/no-go decision backed by real data, a reusable AI validation toolkit, and a network of fellow alumni founders. Many participants will discover their idea needs a pivot or isn&rsquo;t worth pursuing &mdash; that&rsquo;s a valuable outcome too.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much time does Phase 2 require?</div>
+        <div class="faq-a">Phase 2 is more intensive: ~10&ndash;15 hours per week for 12 weeks (late Sep&ndash;Dec). You&rsquo;re building a real product and acquiring real users. It&rsquo;s still designed for people with day jobs, but you&rsquo;ll need to carve out serious evening/weekend time.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What&rsquo;s the &euro;500 build grant?</div>
+        <div class="faq-a">Each Phase 2 team receives &euro;500 from the programme, matched 1-for-1 by the founding team (&euro;1,000 total). This ensures skin in the game while giving you real fuel: hosting, AI tool subscriptions, small ad budgets, domains &mdash; whatever accelerates your venture. You report how you used it at Demo Day.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How does the path to Tier 1 programmes work?</div>
+        <div class="faq-a">We&rsquo;re building direct relationships with leading APAC accelerators and ecosystem partners. Strong Phase 2 projects with a live MVP and traction will receive warm introductions. The December Demo Day jury includes investors and programme representatives.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- APPLY CTA -->
+<section class="cta-section" id="apply">
+  <h2>Ready to Spark Your Idea?</h2>
+  <p>Applications open until June 15, 2026.<br>15 spots for Phase 1.<br>Top 3 advance to Build &amp; Launch.</p>
+  <a href="https://forms.gle/Mq4Md8ijajKArS4D7" class="cta-btn" target="_blank">Apply Now</a>
+  <p style="margin-top:16px; font-size:0.85rem; opacity:0.6;">Takes ~5 minutes. You&rsquo;ll need your LinkedIn profile and a short description of your idea.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>ESSEC Spark APAC &middot; Pilot Cohort 1 &middot; 2026</p>
+  <p style="margin-top:8px; font-size:0.8rem;">An initiative of the ESSEC Institute for Entrepreneurship &amp; Innovation APAC, supported by ESSEC Alumni</p>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ESSEC Spark APAC — From Idea to Traction</title>
 <style>
   :root {
