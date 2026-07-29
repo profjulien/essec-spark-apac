@@ -55,7 +55,7 @@ Worse: confirmation bias now comes with a research engine. Ask any AI to support
 So two rules run through every prompt in this programme, built into the materials themselves:
 
 - **Make your AI argue against you.** Every weekly prompt block contains a mandatory challenge round — the literal adversarial prompt. The standing instructions you'll paste in Part 1 commit your AI to giving the strongest case *against* whenever you ask it to support you.
-- **Evidence comes from people.** A number from real strangers beats any amount of AI-generated confidence. Before each test you write down a threshold — "we are right if…" — and you never move it once the test has started. Your AI is instructed to refuse if you try.
+- **Evidence comes from people.** A commitment from real strangers beats any amount of AI-generated confidence. Before each test you write down a threshold — "we are right if…" — and you never move it once the test has started. Your AI is instructed to refuse if you try.
 
 ## Why we start with you
 
@@ -81,13 +81,11 @@ The three-file discipline is also why selection can be fair. Every team fills th
 
 | Axis | What's being judged | Weight |
 |---|---|---|
-| Evidence quality | Real traffic, real conversations, real willingness to pay | 30% |
-| Lean rigour | Pre-committed thresholds, actionable metrics, honest reading | 20% |
-| Traction signal | Did strangers actually respond, commit, or pay? | 20% |
-| Validated learning | Quality of the pivot-or-persevere decision | 15% |
-| Right to win & execution | Unfair advantage, defensibility, speed, ability to run the loop again | 15% |
+| **Evidence** | Did real strangers respond, commit, or pay — with proof (numbers, links, quotes), not vibes or launch energy | 50% |
+| **Rigour** | Thresholds set before the test and never moved · honest hit-or-miss reading · a sharp pivot-or-persevere call | 30% |
+| **Edge to win & execution** | A real unfair advantage for this problem · speed · coachability, including what you contribute to the cohort's collective learning · ability to run the loop again in Phase 2 | 20% |
 
-A team that ran a clean experiment, hit a real threshold and made a sharp call out-ranks a slicker idea with thin evidence. **We reward the loop.** The rubric is public on purpose — you'll score yourselves against it before we do.
+Three files, three axes: the Traction Log holds your Evidence, the locked thresholds and Learning Cards show your Rigour, and §1 is your Edge to win. A team that ran a clean experiment, hit a real threshold and made a sharp call out-ranks a slicker idea with thin evidence. **We reward the loop.** The rubric is public on purpose — you'll score yourselves against it before we do.
 
 ## Your Week 0 plan
 
@@ -172,7 +170,7 @@ Updated: [date] · v[N] · One page max. Rewritten at every session close.
 [Who exactly · how often they hit the problem · how severely · what they
 do about it today.]
 
-## Right to win
+## Edge to win
 [Strongest unfair advantage for THIS problem, citing the Week-0 inventory
 item it comes from · one-line answer to "feature or company, and why".]
 
@@ -221,7 +219,7 @@ customer's exact words]
 Append-only. One section added per week. Earlier sections are NEVER edited —
 corrections go in the newest section. By Week 6 this file is the pitch.
 
-## §1 — Right to Win + Hypotheses          (Week 1)
+## §1 — Edge to Win + Hypotheses          (Week 1)
 ## §2 — Test Card #1 + Traffic Plan        (Week 2)
 ## §3 — Experiment #1 raw results          (Week 3)
 ## §4 — Learning Card #1 + Test Card #2    (Week 4)
@@ -320,6 +318,15 @@ Setup (one founder per team is enough; we demo this live in Week 2):
 4. Run the tool inside the folder. Work as usual; the files update themselves.
 
 Teams selected for **Phase 2 will be required** to run this setup — the build phase lives in the folder. Getting one founder comfortable with it during Phase 1 is the easiest head start you can buy.
+
+## 8. Where this system comes from (optional reading)
+
+None of this is invented for Spark — it mirrors how the best AI practitioners work, translated to venture validation:
+
+- **[Cline's Memory Bank](https://docs.cline.bot/best-practices/memory-bank)** — the canonical file-based memory methodology this workspace mirrors: *"a documentation methodology that works with any AI that can read docs."* Their `activeContext` / `progress` files and "update memory bank" ritual are our context file, Traction Log, and "close the session."
+- **[Anthropic — Effective Context Engineering for AI Agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)** — why the ritual works: context is *"a finite resource with diminishing marginal returns"* (hence the one-page cap), agents should keep notes outside the chat and pull them back in (hence the journal), and long work survives through compaction — summarise state, start fresh (hence the rewrite-and-new-chat cycle).
+- **[AGENTS.md](https://agents.md/)** — the open, Linux Foundation–stewarded standard ("a README for agents") behind the power lane's instruction file, adopted by 60k+ projects.
+- **MemGPT** (Packer et al., 2023) — the research paper behind the pattern: a small working context plus external files the AI explicitly reads and writes. Your three files are that architecture, by hand.
 
 ---
 
